@@ -49,3 +49,18 @@ class ParentNode(HTMLNode):
             new_string += node.to_html()
 
         return f'<{self.tag}>{new_string}</{self.tag}>'
+
+
+def text_node_to_html_node(text_node):
+    text_type = {
+        'text': '',
+        'bold': 'b',
+        'italic': 'i',
+        'code': 'code',
+        'link': 'a',
+        'image': 'img'
+    }
+
+    if text_node.text_type in text_type:
+        return LeafNode(text_node.text, text_type[text_node.type])
+    raise Exception('Type not found')
