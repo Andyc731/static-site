@@ -48,19 +48,20 @@ def block_to_block_type(block):
 
 def block_type_heading(block):
     count = 0
-    str = block
-    while str[0] == "#":
+    new_block = block
+    while new_block[0] == "#":
         count += 1
-        str = str[1:]
-    str = block.lstrip("# ")
-    html_nodes = block_to_html_node(str)
+        new_block = new_block[1:]
+    new_block = block.lstrip("# ")
+    html_nodes = block_to_html_node(new_block)
     return ParentNode(html_nodes, f"h{count}")
 
 
 def block_type_code(block):
     new_block = block.strip("```")
-    html_nodes = block_to_html_node(str)
-    return ParentNode([ParentNode([html_nodes], "code")], "pre")
+    stripped_block = new_block.strip("\n ")
+    html_nodes = block_to_html_node(stripped_block)
+    return ParentNode([ParentNode(html_nodes, "code")], "pre")
 
 
 def block_type_ulist(block):
