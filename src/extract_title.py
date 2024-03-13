@@ -12,5 +12,5 @@ def extract_title(markdown):
             count += 1
 
         if count == 1:
-            return block
+            return block.strip("# ")
     raise Exception("no h1 header")
